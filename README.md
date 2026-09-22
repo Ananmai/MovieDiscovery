@@ -1,5 +1,7 @@
 # 🎬 CineScope — Movie Discovery Application
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAnanmai%2FMovieDiscovery)
+
 A full-stack movie discovery application built with **React**, **Node.js (Express)**, and persistent **SQLite**. Designed from the ground up to feel like a modern, production-grade streaming and discovery product rather than a simple API wrapper.
 
 ---
