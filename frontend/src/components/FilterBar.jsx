@@ -1,5 +1,27 @@
 import React from 'react';
-import { Filter, ArrowUpDown, Calendar, Star, RotateCcw } from 'lucide-react';
+import { ArrowUpDown, Calendar, Star, RotateCcw, SlidersHorizontal, Check } from 'lucide-react';
+
+const GENRE_ICONS = {
+  Action: '💥',
+  Adventure: '🧭',
+  Animation: '🎨',
+  Comedy: '🍿',
+  Crime: '🕵️',
+  Documentary: '📽️',
+  Drama: '🎭',
+  Family: '🎈',
+  Fantasy: '🧙',
+  History: '📜',
+  Horror: '😱',
+  Music: '🎵',
+  Mystery: '🔍',
+  Romance: '💖',
+  'Sci-Fi': '🚀',
+  'TV Movie': '📺',
+  Thriller: '⚡',
+  War: '⚔️',
+  Western: '🤠',
+};
 
 export function FilterBar({
   genres = [],
@@ -15,15 +37,15 @@ export function FilterBar({
   totalResults,
 }) {
   const sortOptions = [
-    { value: 'popularity.desc', label: 'Most Popular' },
-    { value: 'vote_average.desc', label: 'Highest Rated' },
-    { value: 'primary_release_date.desc', label: 'Release Date (Newest)' },
-    { value: 'primary_release_date.asc', label: 'Release Date (Oldest)' },
-    { value: 'title.asc', label: 'Title (A-Z)' },
+    { value: 'popularity.desc', label: '🔥 Most Popular' },
+    { value: 'vote_average.desc', label: '⭐ Highest Rated' },
+    { value: 'primary_release_date.desc', label: '📅 Release Date (Newest)' },
+    { value: 'primary_release_date.asc', label: '⏳ Release Date (Oldest)' },
+    { value: 'title.asc', label: '🔤 Title (A-Z)' },
   ];
 
   const yearOptions = [
-    { value: '', label: 'All Years' },
+    { value: '', label: 'All Release Years' },
     { value: '2024', label: '2024' },
     { value: '2023', label: '2023' },
     { value: '2022', label: '2022' },
@@ -41,9 +63,9 @@ export function FilterBar({
 
   const ratingOptions = [
     { value: 0, label: 'All Ratings' },
-    { value: 8, label: '8.0+ Stars' },
-    { value: 7, label: '7.0+ Stars' },
-    { value: 6, label: '6.0+ Stars' },
+    { value: 8, label: '⭐ 8.0+ Exceptional' },
+    { value: 7, label: '⭐ 7.0+ Great' },
+    { value: 6, label: '⭐ 6.0+ Good' },
   ];
 
   const hasActiveFilters = Boolean(
@@ -54,114 +76,112 @@ export function FilterBar({
   );
 
   return (
-    <div className="bg-cinema-card/70 border border-cinema-border/60 rounded-2xl p-4 sm:p-5 mb-8 shadow-sm space-y-4">
+    <div className="glass-panel rounded-2xl p-4 sm:p-5 mb-8 shadow-xl space-y-4">
       
-      {/* Top row: Dropdown controls and Reset */}
+      {/* Top Filter Controls */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2.5">
           
-          {/* Sort By */}
+          <div className="flex items-center gap-1.5 text-xs font-bold text-slate-300 uppercase tracking-wider pr-1">
+            <SlidersHorizontal className="w-3.5 h-3.5 text-brand-400" />
+            <span>Filters</span>
+          </div>
+
+          {/* Sort By Select */}
           <div className="relative">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-cinema-surface rounded-xl border border-cinema-border text-xs text-slate-300">
-              <ArrowUpDown className="w-3.5 h-3.5 text-brand-400" />
-              <span className="text-slate-400">Sort:</span>
-              <select
-                value={sortBy}
-                onChange={(e) => onSelectSort(e.target.value)}
-                className="bg-transparent text-slate-100 font-medium focus:outline-none cursor-pointer pr-2"
-              >
-                {sortOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value} className="bg-cinema-surface text-slate-200">
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <select
+              value={sortBy}
+              onChange={(e) => onSelectSort(e.target.value)}
+              className="px-3.5 py-2 bg-cinema-card/90 hover:bg-cinema-surface border border-cinema-border/70 hover:border-brand-500/50 rounded-xl text-xs text-slate-200 font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/30 cursor-pointer transition-all"
+            >
+              {sortOptions.map((opt) => (
+                <option key={opt.value} value={opt.value} className="bg-cinema-card text-slate-200">
+                  {opt.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Year Filter */}
           <div className="relative">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-cinema-surface rounded-xl border border-cinema-border text-xs text-slate-300">
-              <Calendar className="w-3.5 h-3.5 text-brand-400" />
-              <span className="text-slate-400">Year:</span>
-              <select
-                value={selectedYear}
-                onChange={(e) => onSelectYear(e.target.value)}
-                className="bg-transparent text-slate-100 font-medium focus:outline-none cursor-pointer pr-2"
-              >
-                {yearOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value} className="bg-cinema-surface text-slate-200">
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <select
+              value={selectedYear}
+              onChange={(e) => onSelectYear(e.target.value)}
+              className="px-3.5 py-2 bg-cinema-card/90 hover:bg-cinema-surface border border-cinema-border/70 hover:border-brand-500/50 rounded-xl text-xs text-slate-200 font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/30 cursor-pointer transition-all"
+            >
+              {yearOptions.map((opt) => (
+                <option key={opt.value} value={opt.value} className="bg-cinema-card text-slate-200">
+                  {opt.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Rating Filter */}
           <div className="relative">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-cinema-surface rounded-xl border border-cinema-border text-xs text-slate-300">
-              <Star className="w-3.5 h-3.5 text-amber-400" />
-              <span className="text-slate-400">Rating:</span>
-              <select
-                value={minRating}
-                onChange={(e) => onSelectMinRating(Number(e.target.value))}
-                className="bg-transparent text-slate-100 font-medium focus:outline-none cursor-pointer pr-2"
-              >
-                {ratingOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value} className="bg-cinema-surface text-slate-200">
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <select
+              value={minRating}
+              onChange={(e) => onSelectMinRating(Number(e.target.value))}
+              className="px-3.5 py-2 bg-cinema-card/90 hover:bg-cinema-surface border border-cinema-border/70 hover:border-brand-500/50 rounded-xl text-xs text-slate-200 font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/30 cursor-pointer transition-all"
+            >
+              {ratingOptions.map((opt) => (
+                <option key={opt.value} value={opt.value} className="bg-cinema-card text-slate-200">
+                  {opt.label}
+                </option>
+              ))}
+            </select>
           </div>
 
-          {/* Reset Filters button */}
+          {/* Reset Filters */}
           {hasActiveFilters && (
             <button
               onClick={onResetFilters}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 rounded-xl transition-all"
+              className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-rose-400 hover:text-white bg-rose-500/10 hover:bg-rose-500/25 border border-rose-500/30 rounded-xl transition-all shadow-sm active:scale-95"
             >
-              <RotateCcw className="w-3 h-3" />
+              <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset Filters</span>
             </button>
           )}
         </div>
 
-        {/* Results count */}
+        {/* Results Counter */}
         {typeof totalResults === 'number' && (
-          <div className="text-xs text-slate-400">
-            Found <span className="font-semibold text-slate-200">{totalResults}</span> titles
+          <div className="text-xs font-medium text-slate-400">
+            <span className="font-bold text-white text-sm">{totalResults}</span> films available
           </div>
         )}
       </div>
 
-      {/* Genre Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 scrollbar-thin">
+      {/* Genre Categories Bar */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1.5 pt-1 scrollbar-thin">
         <button
           onClick={() => onSelectGenre('')}
-          className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+          className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
             !selectedGenre
-              ? 'bg-brand-600 text-white shadow-sm'
-              : 'bg-cinema-surface hover:bg-cinema-surface/80 text-slate-300 border border-cinema-border/50'
+              ? 'bg-gradient-to-r from-brand-600 to-indigo-600 text-white shadow-lg shadow-brand-500/30 border border-brand-400/40'
+              : 'bg-cinema-card/80 hover:bg-cinema-surface text-slate-300 border border-cinema-border/60 hover:border-slate-600'
           }`}
         >
-          All Genres
+          <span>🎬</span>
+          <span>All Genres</span>
+          {!selectedGenre && <Check className="w-3 h-3 text-brand-200 ml-0.5" />}
         </button>
+
         {genres.map((g) => {
           const isSelected = String(selectedGenre) === String(g.id);
+          const icon = GENRE_ICONS[g.name] || '🎞️';
           return (
             <button
               key={g.id}
               onClick={() => onSelectGenre(isSelected ? '' : String(g.id))}
-              className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
                 isSelected
-                  ? 'bg-brand-600 text-white shadow-sm'
-                  : 'bg-cinema-surface hover:bg-cinema-surface/80 text-slate-300 border border-cinema-border/50'
+                  ? 'bg-gradient-to-r from-brand-600 to-indigo-600 text-white shadow-lg shadow-brand-500/30 border border-brand-400/40 scale-105'
+                  : 'bg-cinema-card/80 hover:bg-cinema-surface text-slate-300 border border-cinema-border/60 hover:border-slate-600'
               }`}
             >
-              {g.name}
+              <span>{icon}</span>
+              <span>{g.name}</span>
             </button>
           );
         })}

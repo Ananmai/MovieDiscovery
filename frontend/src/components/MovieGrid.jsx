@@ -5,6 +5,7 @@ import { Loader2 } from 'lucide-react';
 export function MovieGrid({
   movies = [],
   onOpenDetails,
+  onOpenTrailer,
   isInWishlist,
   onToggleWishlist,
   hasMore,
@@ -12,7 +13,7 @@ export function MovieGrid({
   isLoadingMore,
 }) {
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       {/* Grid of Movie Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
         {movies.map((movie) => (
@@ -20,27 +21,31 @@ export function MovieGrid({
             key={movie.id}
             movie={movie}
             onOpenDetails={onOpenDetails}
+            onOpenTrailer={onOpenTrailer}
             isInWishlist={isInWishlist}
             onToggleWishlist={onToggleWishlist}
           />
         ))}
       </div>
 
-      {/* Pagination / Load More Button */}
+      {/* Load More Button */}
       {hasMore && (
-        <div className="flex justify-center pt-4 pb-8">
+        <div className="flex justify-center pt-2 pb-10">
           <button
             onClick={onLoadMore}
             disabled={isLoadingMore}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-cinema-card hover:bg-cinema-surface border border-cinema-border/70 hover:border-brand-500/50 text-slate-200 hover:text-white text-sm font-semibold transition-all shadow-md active:scale-95 disabled:opacity-50"
+            className="group flex items-center gap-2.5 px-8 py-3.5 rounded-2xl glass-panel hover:bg-white/10 text-slate-200 hover:text-white text-sm font-bold transition-all shadow-xl active:scale-95 disabled:opacity-50 border border-white/10 hover:border-brand-500/50"
           >
             {isLoadingMore ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin text-brand-400" />
-                <span>Loading more movies...</span>
+                <span>Fetching more films...</span>
               </>
             ) : (
-              <span>Load More Movies</span>
+              <>
+                <span>Load More Movies</span>
+                <span className="text-brand-400 group-hover:translate-x-1 transition-transform">↓</span>
+              </>
             )}
           </button>
         </div>
