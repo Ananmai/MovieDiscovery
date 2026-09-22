@@ -2,7 +2,7 @@
   "name": "movie-discovery-backend",
   "version": "1.0.0",
   "description": "Backend API layer for Movie Discovery App with node:sqlite and TMDB",
-  "main": "src/server.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
