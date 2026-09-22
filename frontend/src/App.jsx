@@ -68,7 +68,6 @@ export function App() {
       posterUrl: movie.posterUrl || movie.poster_path,
     });
 
-    // Auto-hide toast after 3.5s
     setTimeout(() => {
       setToast(null);
     }, 3500);
@@ -94,7 +93,6 @@ export function App() {
           title: details.title,
         });
       } else {
-        // Fallback to opening details modal
         setSelectedMovieId(movie.id);
       }
     } catch (err) {
@@ -103,12 +101,12 @@ export function App() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-[#07090e] text-slate-100 overflow-x-hidden">
+    <div className="relative min-h-screen flex flex-col bg-[#f8fafc] text-slate-800 overflow-x-hidden">
       
-      {/* Ambient background glow orbs for high-end cinematic atmosphere */}
-      <div className="fixed top-0 left-1/4 w-[600px] h-[600px] bg-brand-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
-      <div className="fixed top-1/3 right-10 w-[500px] h-[500px] bg-rose-600/10 rounded-full blur-[150px] pointer-events-none -z-10" />
-      <div className="fixed bottom-10 left-10 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[160px] pointer-events-none -z-10" />
+      {/* Subtle warm ambient lighting tints for clean light atmosphere */}
+      <div className="fixed top-0 left-1/4 w-[600px] h-[600px] bg-orange-400/5 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="fixed top-1/3 right-10 w-[500px] h-[500px] bg-amber-400/5 rounded-full blur-[150px] pointer-events-none -z-10" />
+      <div className="fixed bottom-10 left-10 w-[500px] h-[500px] bg-rose-400/5 rounded-full blur-[160px] pointer-events-none -z-10" />
 
       {/* Top Navbar */}
       <Navbar
@@ -138,7 +136,7 @@ export function App() {
             {/* Error Notification Banner */}
             {error && <ErrorAlert message={error} onRetry={refresh} />}
 
-            {/* Hero Carousel Spotlight (Visible on Page 1 when not searching and no genre selected) */}
+            {/* Hero Carousel Spotlight */}
             {!searchQuery && movies.length > 0 && !selectedGenre && minRating === 0 && (
               <HeroSpotlight
                 movies={movies}
@@ -152,10 +150,10 @@ export function App() {
             {/* Section Header */}
             <div className="flex flex-wrap items-end justify-between gap-4 mb-5">
               <div>
-                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2.5">
+                <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-2.5">
                   {searchQuery ? (
                     <span>
-                      Results for <span className="text-gradient">"{searchQuery}"</span>
+                      Results for <span className="text-orange-600">"{searchQuery}"</span>
                     </span>
                   ) : activeTab === 'trending' ? (
                     <span>🔥 Trending Worldwide</span>
@@ -165,7 +163,7 @@ export function App() {
                     <span>✨ Explore & Discover</span>
                   )}
                 </h2>
-                <p className="text-xs text-slate-400 mt-1 font-medium">
+                <p className="text-xs text-slate-500 mt-1 font-medium">
                   {searchQuery
                     ? `Showing live results matching your query`
                     : `Curated cinematic collections updated in real-time`}
@@ -241,18 +239,18 @@ export function App() {
       {/* Floating Wishlist Toast Notification */}
       <Toast toast={toast} onClose={() => setToast(null)} />
 
-      {/* Sleek Footer */}
-      <footer className="mt-auto border-t border-white/[0.08] bg-[#07090e]/90 backdrop-blur-xl py-8 text-xs text-slate-400">
+      {/* Sleek Light Footer */}
+      <footer className="mt-auto border-t border-slate-200 bg-white py-8 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-6 h-6 rounded-lg bg-gradient-to-tr from-brand-600 to-rose-500 flex items-center justify-center text-white text-xs font-black">
+            <div className="w-6 h-6 rounded-lg bg-gradient-to-tr from-orange-500 to-amber-500 flex items-center justify-center text-white text-xs font-black shadow-sm">
               C
             </div>
-            <p className="font-medium text-slate-300">
+            <p className="font-semibold text-slate-700">
               CineScope Discovery &bull; Powered by React, Node.js & SQLite
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-4 text-slate-400 font-medium">
+          <div className="flex flex-wrap items-center gap-4 text-slate-500 font-medium">
             <span>In-Memory TTL Caching</span>
             <span>&bull;</span>
             <span>Full SQLite ACID Persistence</span>

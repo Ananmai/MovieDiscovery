@@ -6,16 +6,16 @@ export function MovieGridSkeleton({ count = 10 }) {
       {Array.from({ length: count }).map((_, idx) => (
         <div
           key={idx}
-          className="bg-cinema-card rounded-xl overflow-hidden border border-cinema-border/40 flex flex-col"
+          className="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm flex flex-col"
         >
           {/* Poster placeholder */}
-          <div className="aspect-poster w-full bg-cinema-surface/80" />
+          <div className="aspect-poster w-full bg-slate-100" />
           
           {/* Text lines */}
-          <div className="p-3.5 space-y-2.5">
-            <div className="h-4 bg-cinema-surface rounded-md w-3/4" />
-            <div className="h-3 bg-cinema-surface/60 rounded-md w-1/2" />
-            <div className="h-3 bg-cinema-surface/40 rounded-md w-full" />
+          <div className="p-4 space-y-2.5">
+            <div className="h-4 bg-slate-200 rounded-md w-3/4" />
+            <div className="h-3 bg-slate-100 rounded-md w-1/2" />
+            <div className="h-3 bg-slate-100 rounded-md w-full" />
           </div>
         </div>
       ))}
