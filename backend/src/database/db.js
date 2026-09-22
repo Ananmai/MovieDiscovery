@@ -7,10 +7,11 @@ import { config } from '../config/index.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Resolve db path relative to backend root if relative
-const dbPath = path.isAbsolute(config.databasePath)
-  ? config.databasePath
-  : path.resolve(__dirname, '../../', config.databasePath);
+// Resolve db path: in serverless (Vercel), only /tmp is writable
+const rawDbPath = process.env.VERCEL ? '/tmp/movies.db' : config.databasePath;
+const dbPath = path.isAbsolute(rawDbPath)
+  ? rawDbPath
+  : path.resolve(__dirname, '../../', rawDbPath);
 
 // Ensure directory exists
 const dbDir = path.dirname(dbPath);
